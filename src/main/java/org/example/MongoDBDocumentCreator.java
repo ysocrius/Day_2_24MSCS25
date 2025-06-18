@@ -23,22 +23,22 @@ import static com.mongodb.client.model.Updates.set;
 public class MongoDBDocumentCreator {
 
     public static void main(String[] args) {
-        // Connection string - update with your MongoDB connection details
+
         String connectionString = "mongodb://localhost:27017";
         
-        // Create a MongoDB client
+
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
             
-            // Get the database
+
             MongoDatabase database = mongoClient.getDatabase("book_db");
             
-            // Get the collection
+
             MongoCollection<Document> collection = database.getCollection("book_collection");
 
-            // Create a list to hold multiple documents
+
             List<Document> documents = new ArrayList<>();
 
-// Add first document
+
             documents.add(new Document()
                     .append("title", "Cloud Computing Fundamentals")
                     .append("author", "Sarah Johnson")
@@ -47,7 +47,7 @@ public class MongoDBDocumentCreator {
                     .append("categories", Arrays.asList("cloud", "computing", "aws"))
                     .append("available", true));
 
-// Add second document
+
             documents.add(new Document()
                     .append("title", "Python Data Science")
                     .append("author", "Michael Chen")
@@ -56,7 +56,7 @@ public class MongoDBDocumentCreator {
                     .append("categories", Arrays.asList("python", "data science", "machine learning"))
                     .append("available", true));
 
-// Add third document
+
             documents.add(new Document()
                     .append("title", "Web Development with React")
                     .append("author", "Lisa Rodriguez")
@@ -65,17 +65,17 @@ public class MongoDBDocumentCreator {
                     .append("categories", Arrays.asList("javascript", "react", "web"))
                     .append("available", false));
 
-// Insert all documents at once
+
             InsertManyResult result = collection.insertMany(documents);
 
-// Print number of inserted documents
+
             System.out.println("Documents inserted: " + result.getInsertedIds().size());
             
-            // Display all documents after creation
+
             System.out.println("\n--- All Documents After Creation ---");
             displayAllDocuments(collection);
             
-            // Update author name from "Sarah Johnson" to "Lana Kenson"
+
             UpdateResult updateResult = collection.updateOne(
                 eq("author", "Sarah Johnson"), 
                 set("author", "Lana Kenson")
@@ -83,7 +83,7 @@ public class MongoDBDocumentCreator {
             
             System.out.println("\nDocuments updated: " + updateResult.getModifiedCount());
             
-            // Verify the update by finding the document
+
             Document updatedDoc = collection.find(eq("author", "Lana Kenson")).first();
             if (updatedDoc != null) {
                 System.out.println("Updated document: " + updatedDoc.toJson());
@@ -91,16 +91,16 @@ public class MongoDBDocumentCreator {
                 System.out.println("No document found with author 'Lana Kenson'");
             }
             
-            // Display all documents after update
+
             System.out.println("\n--- All Documents After Update ---");
             displayAllDocuments(collection);
             
-            // Delete the book "Web Development with React"
+
             DeleteResult deleteResult = collection.deleteOne(eq("title", "Web Development with React"));
             
             System.out.println("\nDocuments deleted: " + deleteResult.getDeletedCount());
             
-            // Display all documents after deletion
+
             System.out.println("\n--- All Documents After Deletion ---");
             displayAllDocuments(collection);
             

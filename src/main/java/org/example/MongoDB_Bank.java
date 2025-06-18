@@ -24,13 +24,13 @@ public class MongoDB_Bank {
 
     public static void main(String[] args) {
         try (MongoClient mongoClient = MongoClients.create(CONNECTION_STRING)) {
-            // Get the database
+
             MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
             
-            // Get the collection
+
             MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
             
-            // Create a default account if none exists
+
             createDefaultAccountIfNotExists(collection);
             
             boolean exit = false;
@@ -82,11 +82,11 @@ public class MongoDB_Bank {
     }
     
     private static void createDefaultAccountIfNotExists(MongoCollection<Document> collection) {
-        // Check if any account exists
+
         long count = collection.countDocuments();
         
         if (count == 0) {
-            // Create a default account
+
             Document account = new Document()
                     .append("accountId", "ACC001")
                     .append("accountHolder", "Default User")
