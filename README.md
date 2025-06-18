@@ -37,19 +37,3 @@ A more comprehensive example that demonstrates:
 1. Open the project in IntelliJ IDEA
 2. Update the connection string in the examples if your MongoDB is not running on localhost:27017
 3. Right-click on the example file you want to run and select "Run"
-
-## MongoDB Connection
-
-By default, the examples connect to MongoDB at `mongodb://localhost:27017`. If your MongoDB instance is running elsewhere or requires authentication, update the connection string in the examples:
-
-```java
-String connectionString = "mongodb://username:password@hostname:port/database?options";
-```
-
-## Dependencies
-
-This project uses the following dependencies:
-- MongoDB Java Driver (mongodb-driver-sync)
-- BSON
-- Log4J for logging
-- Apache Commons CLI 
